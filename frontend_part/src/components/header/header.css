@@ -1,0 +1,34 @@
+.navbar {
+    background-color: rgb(168, 168, 174);
+    justify-content: space-between;
+
+}
+.navbar_left{
+    justify-content: center;
+    align-items: center;
+    margin-left: 23px;
+    gap: 5px;
+
+}
+
+.navbar_left img{
+    width: 30px;
+    height: 30px;
+    
+}
+
+.navbar_right {
+   justify-content: space-between;
+   gap: 23px;
+   margin-right: 23px;
+}
+
+.navbar_right li{
+    list-style: none;
+}
+
+
+/* utlity */
+.d_flex{
+    display: flex;
+}
