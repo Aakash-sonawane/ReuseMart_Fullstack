@@ -1,12 +1,18 @@
-.navbar {
+.navbar1 {
     background-color: rgb(168, 168, 174);
     justify-content: space-between;
+    /* height: 59px; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
 
 }
 .navbar_left{
     justify-content: center;
     align-items: center;
-    margin-left: 23px;
+    margin-left: 33px;
     gap: 5px;
 
 }
@@ -19,12 +25,24 @@
 
 .navbar_right {
    justify-content: space-between;
-   gap: 23px;
+   align-items: center;
+   gap: 43px;
    margin-right: 23px;
 }
 
 .navbar_right li{
     list-style: none;
+    padding: 5px;
+    width: 90px;
+}
+
+.navbar_right li:hover{
+    text-align: center;
+    cursor: pointer;
+    /* width: 100px; */
+    border-radius: 4px;
+    
+    background-color: rgb(150, 148, 148);
 }
 
 

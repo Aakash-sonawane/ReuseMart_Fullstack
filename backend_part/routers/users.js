@@ -1,12 +1,14 @@
-const express =require('express')
+const express=require("express");
+const userSchema = require("../model/userSchema");
+const { register,login } = require("../controllers/users");
 const router=express.Router();
-const {getUsers, createUser,getUser}=require('../controllers/users')
 
-router.get('/users',getUsers)
 
-router.post('/user',createUser)
 
-router.get('/user/:id',getUser);
+
+router.post('/login',login)
+router.post('/register',register)
+
 
 
 module.exports=router;

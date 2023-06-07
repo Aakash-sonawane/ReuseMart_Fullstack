@@ -2,8 +2,9 @@ const express=require('express');
 const mongoose=require('mongoose');
 const cors=require('cors');
 const app=express();
-const userRouter = require('./routers/users.js')
-const userSchema=require('./model/userSchema')
+const productRouter = require('./routers/products.js')
+const userRouter=require('./routers/users.js')
+const userSchema=require('./model/productSchema.js')
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors())
@@ -17,8 +18,8 @@ db.on('error',()=>{console.log("error")})
 
 db.once("connected",()=>{console.log("connected")})
 
-
 app.use('/',userRouter);
+app.use('/',productRouter);
 
 app.get('/',(req,res)=>{
     res.send('hello')

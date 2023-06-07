@@ -1,43 +1,39 @@
-const userSchema=require('../model/userSchema')
+const userSchema = require("../model/userSchema");
 
- const getUsers= async(req,res)=>{
+
+const register=async(req,res)=>{
+    const user=new userSchema(req.body);
+
     try {
-        const data=await userSchema.find({});
-        res.json(data);
+        const data=await user.save();
+        res.status(200).send(data)
         
     } catch (error) {
-        res.status(500).send("error");
+        res.status(200).send(error.message);
     }
 }
 
-const createUser=async(req,res)=>{
-    const product=new userSchema(req.body);
+
+const login=async(req,res)=>{
+    const {email,password}=req.body;
     try {
-        const datatoSave=await product.save();
-        res.send(datatoSave)
-        console.log(datatoSave);
+        const data=await userSchema.findOne({email:email})
+        if(data){
+            if(password===data.password){
+                console.log(data)
+               return res.send({message:"login successful",user:data})
+            }else{
+                console.log({message:"password didn't match"})
+                return res.send({message:"password didn't match"})
+            }
+        }else{
+            console.log({message:"user not register"})
+            res.send("user not register")
+        }
         
     } catch (error) {
-        res.status(404).send("error in saving data")
-        console.log(error)
-        
-    }
-
-}
-
-const getUser=async(req,res)=>{
-    try {
-        const id=req.params.id;
-        
-        const data=await userSchema.findById(id);
-        res.json(data);
-        
-    } catch (error) {
-        res.status(403).send("not found")
         
     }
 }
-
-exports.getUsers=getUsers
-exports.createUser=createUser;
-exports.getUser=getUser;
+exports.register=register;
+exports.login=login;

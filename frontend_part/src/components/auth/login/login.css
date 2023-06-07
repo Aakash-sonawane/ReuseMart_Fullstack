@@ -1,0 +1,31 @@
+.form-container{
+    width:40%;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    box-shadow: 2px 1px 7px 0px rgb(84, 82, 82);
+    border-radius: 20px;
+    /* width: 100px; */
+    /* background-color: blue; */
+}
+.login_page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    width: 100vw;
+    /* background-color: red; */
+}
+.form_buttons{
+    display: flex;
+    flex-direction: column;
+    /* gap: 20px; */
+    justify-content: center;
+    align-items: center;
+}
+.form_buttons button{
+    width: 200px;
+    margin-top: 10px;
+}
