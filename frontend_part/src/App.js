@@ -1,35 +1,39 @@
 // import logo from './logo.svg';
 import './App.css';
-import { useEffect, useState } from 'react';
+import {useEffect, useState } from 'react';
 import axios from 'axios'
-// import Header from './components/header/header';
 import { RouterProvider, createBrowserRouter} from 'react-router-dom';
 import Main from './components/main/main';
 import AddProduct from './components/addProduct/addProduct';
-// import Home from "./components/home/home"
 import Product from './components/main/searchproduct/product';
 import Login from './components/auth/login/login';
 import UserContext from './context/userContext';
 import ProductContext from './context/productContext';
 import Register from './components/auth/register/register';
+import Profile from './components/router/profile/profile';
+
+
 function App() {
   const[products,setProducts]=useState([]);
   const[serchProductid,setSearchProductId]=useState('');
-  const[loginUser,setloginUser]=useState(localStorage.getItem('user' || {}));
+  const[loginUser,setloginUser]=useState(JSON.parse(localStorage.getItem('user'))|| []);
   
 
   
 
   useEffect(()=>{
-    localStorage.setItem('user',loginUser);
+    if(loginUser)
+    localStorage.setItem('user',JSON.stringify(loginUser));
+    console.log(loginUser)
     fetchdata();
+    
   },[loginUser]);
 
 
   const route=createBrowserRouter([
     {
       path:"/",
-      element:loginUser?<Main setSearchProductId={setSearchProductId}/>:<Login/>,
+      element:Object.keys(loginUser).length>0?<Main setSearchProductId={setSearchProductId}/>:<Login/>,
       children:[
         {
           path:'/addProduct',
@@ -40,8 +44,8 @@ function App() {
           element:<Product serchProductid={serchProductid}/>,
         },
         {
-          path:'/cart',
-          element:<h1>cart</h1>
+          path:'/profile',
+          element:<Profile/>
         },
         {
           path:'/about',
@@ -58,7 +62,7 @@ function App() {
       element:<Register/>
     }
   ])
-  
+  console.log("loginuser",loginUser);
   const fetchdata=async()=>{
     const response= await axios.get('http://localhost:9000/products')
     setProducts(response.data);

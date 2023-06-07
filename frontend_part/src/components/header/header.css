@@ -1,16 +1,19 @@
 .navbar1 {
-    background-color: rgb(168, 168, 174);
+    background-color: #093b2f;
     justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
     /* height: 59px; */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    color: rgb(170, 166, 166);
     
 
 }
 .navbar_left{
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     margin-left: 33px;
     gap: 5px;
@@ -33,7 +36,9 @@
 .navbar_right li{
     list-style: none;
     padding: 5px;
-    width: 90px;
+    width: 150px;
+    text-align: center;
+    font-size: 18px;
 }
 
 .navbar_right li:hover{
@@ -41,8 +46,10 @@
     cursor: pointer;
     /* width: 100px; */
     border-radius: 4px;
-    
-    background-color: rgb(150, 148, 148);
+    background-color: #83a5c6;
+    color: black;
+    /* font-style: normal; */
+    font-weight: 500;
 }
 
 

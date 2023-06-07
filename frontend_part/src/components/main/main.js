@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Header from '../header/header'
 import Home from '../home/home'
 import { Outlet, useOutlet } from 'react-router-dom'
-// import Body from './body'
+
 import "./main.css"
-import productContext from '../../context/productContext'
+// import productContext from '../../context/productContext'
 
 export default function Main({setSearchProductId}) {
   

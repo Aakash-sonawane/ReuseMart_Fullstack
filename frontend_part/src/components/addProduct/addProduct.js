@@ -7,8 +7,6 @@ export default function AddProduct() {
     const[loginUser,setloginUser]=useContext(userContext)
     const [product,setProduct]=useState({
       "user_id":loginUser._id,
-      "name":loginUser.name,
-      "email":loginUser.email,
       "contact":"",
       "image":"",
       "productName":"",

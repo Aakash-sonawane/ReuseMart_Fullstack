@@ -10,12 +10,14 @@ export default function Header() {
             <img src='https://p7.hiclipart.com/preview/181/883/650/circle-arrow-diagram-clip-art-round.jpg' alt=''></img>
             <h3>ReUseMart</h3>
         </div>
-        <ul className='navbar_right d_flex'>
+        <div className='navbar_right d_flex'>
+        <ul className='d_flex'>
             <li onClick={()=>{navigate('/')}}>Home</li>
             <li onClick={()=>{navigate('/about')}}>About</li>
             <li onClick={()=>{navigate('/addProduct')}}>Add product</li>
-            <li onClick={()=>{navigate('/cart')}}>Cart</li>
+            <li onClick={()=>{navigate('/profile')}}>Profile</li>
         </ul>
+        </div>
 
         </nav>
       
