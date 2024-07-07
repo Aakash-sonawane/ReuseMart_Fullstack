@@ -26,8 +26,9 @@ export default function Login() {
     e.preventDefault();
     axios.post('http://localhost:9000/login',user)
     .then(res=>{
+      console.log(res.data.message)
       alert(res.data.message)
-      // if(res.data.message=="login successful");
+      if(res.data.message=="login successful")
       setloginUser(res.data.user)
 
     });
@@ -35,7 +36,7 @@ export default function Login() {
   }
   return (
     <div className='login_page'>
-      {console.log(user)}
+      {/* {console.log(user)} */}
     <div className='form-container'>
         <form>
   <div className="row mb-3">

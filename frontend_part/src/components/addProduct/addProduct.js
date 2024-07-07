@@ -23,6 +23,7 @@ export default function AddProduct() {
         // let name=;
         product[e.target.name]=e.target.value;
         setProduct({...product})
+        console.log('product',product)
         
     }
     const handleAddress=(e)=>{
@@ -31,6 +32,7 @@ export default function AddProduct() {
       setAddress({...address})
       product["address"]=address;
       setProduct({...product})
+      console.log('Adress'.address)
   }
 
   console.log("product is",product)
@@ -44,7 +46,7 @@ export default function AddProduct() {
     // console.log("product is",product);
   return (
     <div className='product_form'>
-        <form className="row g-3" onSubmit={handleSubmit}>
+        <form className="row g-3">
   {/* <div className="col-md-6">
     <label htmlFor="inputname" className="form-label">Name</label>
     <input type="text" name='name' onChange={handleChange} className="form-control" id="inputname" value={product.name}/>
@@ -112,7 +114,11 @@ export default function AddProduct() {
     </div>
   </div> */}
   <div className="col-12">
-    <button type="submit" className="btn btn-primary" onClick={(e)=>{e.preventDefault()}}>Add product</button>
+    <button type="submit" className="btn btn-primary" onClick={(e)=>{
+      // e.preventDefault()
+      handleSubmit();
+    
+    }}>Add product</button>
   </div>
 </form>
     </div>

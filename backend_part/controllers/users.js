@@ -28,7 +28,7 @@ const login=async(req,res)=>{
             }
         }else{
             console.log({message:"user not register"})
-            res.send("user not register")
+            res.send({message:"user not register"})
         }
         
     } catch (error) {

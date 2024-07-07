@@ -11,6 +11,7 @@ import UserContext from './context/userContext';
 import ProductContext from './context/productContext';
 import Register from './components/auth/register/register';
 import Profile from './components/router/profile/profile';
+import MyProduct from './components/router/profile/myProduct/myProduct';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
   useEffect(()=>{
     if(loginUser)
     localStorage.setItem('user',JSON.stringify(loginUser));
-    console.log(loginUser)
+    // console.log(loginUser)
     fetchdata();
     
   },[loginUser]);
@@ -45,7 +46,29 @@ function App() {
         },
         {
           path:'/profile',
-          element:<Profile/>
+          element:<Profile/>,
+          children:[
+            {
+              path:'/profile/user',
+              element:<h1>product</h1>
+            },
+            {
+              path:'/profile/my-product',
+              element:<MyProduct/>
+            },
+            {
+              path:'/profile/notification',
+              element:<h1>Notifications</h1>
+            },
+            {
+              path:'/profile/message',
+              element:<h1>Messages</h1>
+            },
+            {
+              path:'/profile/addProduct',
+              element:<h1>Add Product</h1>
+            },
+          ]
         },
         {
           path:'/about',
@@ -62,13 +85,13 @@ function App() {
       element:<Register/>
     }
   ])
-  console.log("loginuser",loginUser);
+  // console.log("loginuser",loginUser);
   const fetchdata=async()=>{
     const response= await axios.get('http://localhost:9000/products')
     setProducts(response.data);
     // console.log(response)
   }
-  console.log("products is",products)
+  // console.log("products is",products)
 
 
   return (

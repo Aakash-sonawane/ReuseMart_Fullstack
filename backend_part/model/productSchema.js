@@ -2,37 +2,29 @@ const mongoose=require("mongoose")
 
 const productSchema=new mongoose.Schema({
     user_id:{
-        type:String,
-        required:true
-    },
-    name:{
-        type:String,
-        required:true
-    },
-    email:{
-        type:String,
-        required:true
+        type:String
+        // required:true
     },
     contact:{
         type:Number,
-        required:true
+        // required:true
     },
     productName:{
         type:String,
-        required:true
+        // required:true
     },
     image:{
         type:String,
-        required:true
+        // required:true
     },
     price:{
         type:Number,
-        required:true
+        // required:true
     },
 
     address:{
         type:Object,
-        required:true
+        // required:true
     }
 })
 
