@@ -12,19 +12,20 @@ export default function MyProduct() {
     useEffect(() => {
         const myProducts = product.filter((item) => {
 
-            return item["user_id"] == user['_id'];
+            return item["user_id"] === user['_id'];
         })
         setMyProducts([...myProducts])
 
     }, [product])
 
-    { myProducts && console.log("product in myproduct component is", myProducts) }
+    // { myProducts && console.log("product in myproduct component is", myProducts) }
     return (
         <div className='myProduct'>
             <div className='container'>
                 {myProducts &&
                     myProducts.map((item) => {
-                        return <Card data={item} isEdit={true} />
+                        console.log("item",item['_id'])
+                        return <Card key={item['_id']} data={item} isEdit={true} />
                     })
                 }
 

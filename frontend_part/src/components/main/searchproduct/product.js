@@ -1,53 +1,83 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState, useContext} from 'react'
+import userContext from '../../../context/userContext'
 import "./product.css"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,useParams} from 'react-router-dom'
+
 
 export default function Product({ serchProductid }) {
   const [product, setProduct] = useState('')
-  const [user, setUser] = useState('')
-  const navigate=useNavigate();
+  const [seller, setSeller] = useState('')
+  const[loginUser]=useContext(userContext)
+  const [messageArray, setmessageArray] = useState('')
 
+
+  const navigate=useNavigate();
+  const params = useParams();
+  const chatRef = useRef(null)
+
+  let flag=false;
   useEffect(() => {
     if(!serchProductid){
       navigate('/')
     }
-    fetchSingleProductData()
-    // fetchUer();
-   
-  },[])
+    if(flag){
+      fetchSingleProductData()
+      // fetchUserData()
+    }
 
-  // const fetching=async()=>{
-  //   await ;
-  //   // if(product)
-  //   await fetchUer();
-  // }
+    if(product){
+      let fiterMessageArray=product.messages.filter(msg=>{
+        return msg.senderId===loginUser['_id']
+      })
+      setmessageArray(fiterMessageArray);
+    }
 
-  // const fetchUer=async()=>{
-  //   if(product){
+    console.log(seller)
+    return ()=>{
+      flag=true;
+    }
 
-  //     const response=await axios.get(`http://localhost:9000/user/${product["user_id"]}`);
-  //     console.log("user is",response.data);
-  //     setUser(response.data);
-  //   }
-  // }
-  // fetchUer();
+    
+
+  },[product])
+
+  
 
 
   const fetchSingleProductData = async () => {
     const response = await axios.get(`http://localhost:9000/product/${serchProductid}`);
-    setProduct(response.data);
+    setProduct(response.data)
     if(!response.data){
       navigate('/');
     }
-    const userresponse=await axios.get(`http://localhost:9000/user/${response.data["user_id"]}`);
-      // console.log("user is",userresponse.data);
-      setUser(userresponse.data);
+    const sellerresponse=await axios.get(`http://localhost:9000/user/${response.data["user_id"]}`);
+      setSeller(sellerresponse.data);
   }
+  // const fetchUserData= async ()=>{
+  //   if(product){
+      
+  //   }
+  // }
+
+  const sendMessage=async(e)=>{
+    e.preventDefault()
+        if(!chatRef.current.value){
+            return;
+        }
+        const postData={
+          sender:loginUser,
+          msgFromSender:chatRef.current.value
+        }
+        const response= await axios.patch(`http://localhost:9000/product/chat?id=${params.id}`,postData)
+  }
+
+
+
   return (
     <div>
       
-      {product &&
+      {(product && seller) &&
 
         <div className="container">
           <div className='product'>
@@ -63,11 +93,36 @@ export default function Product({ serchProductid }) {
             <div className='product_container'>
               <h1>Seller Contact</h1>
               <div className='seller_info'>
-              <div><p><b>Name:-</b>{user.name}</p></div>
-              <div><p><b>Email:-</b>{user.email}</p></div>
-              <div><p><b>contact number:-</b>{product.contact}</p></div>
+              <div><p><b>Name:-</b>{seller.name}</p></div>
+              {/* <div><p><b>Email:-</b>{user.email}</p></div>
+              <div><p><b>contact number:-</b>{product.contact}</p></div> */}
               <div><p><b>Address:-</b>{`${product.address['area']}, city-${product.address['city']}, state;-${product.address['state']}`}</p></div>
               <div><p><b>Pin-Code:-</b>{product.address['zipCode']}</p></div>
+              
+              <div className="chat-btn">Chat with Seller</div>
+              <div className='chatroom-wrapper'>
+
+                <div className='chat-app'>
+                  <ul>
+                  {messageArray.length?messageArray[0].chat.map(msg=>{
+                    return <li className={msg[loginUser.name]?'sender':'reciver'}>
+                      <div className='text-msg'>{msg[loginUser.name]}</div>
+                    </li>
+                  }):null
+                }
+                  
+                  </ul>
+                </div>
+
+
+                <div className='chat-form'>
+                  <form >
+                  <input type='text' ref={chatRef} className='serachinput'/>
+                  <button type='submit' className='submit-btn' onClick={sendMessage}>send</button>
+                  </form>
+                </div>
+
+              </div>
               </div>
 
             </div>

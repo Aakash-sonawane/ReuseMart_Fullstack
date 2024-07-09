@@ -1,10 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { useQuery } from 'react-router-dom';
 import "./addProduct.css"
 import axios from 'axios';
 import userContext from '../../context/userContext';
+import { useParams } from 'react-router-dom';
 
-export default function AddProduct() {
+
+export default function AddProduct({isNew}) {
     const[loginUser,setloginUser]=useContext(userContext)
+
     const [product,setProduct]=useState({
       "user_id":loginUser._id,
       "contact":"",
@@ -19,11 +23,36 @@ export default function AddProduct() {
       "zipCode":"",
     })
 
+    const params = useParams();
+    useEffect(()=>{
+      console.log("hello",params)
+      if(params.id){
+        getdata(params.id);
+      }
+    },[])
+
+    const getdata=async (id)=>{
+      const response= await axios.get(`http://localhost:9000/product/${id}`)
+      console.log("edit",response.data)
+      setProduct(response.data)
+      setAddress(response.data.address)
+      
+    }
+
+    const handleUpdatedInfo= async()=>{
+      console.log(params.id)
+      
+      const response= await axios.patch(`http://localhost:9000/update-product?id=${params.id}`,product)
+
+      alert(response.data.message)
+
+    }
+
     const handleChange=(e)=>{
         // let name=;
         product[e.target.name]=e.target.value;
         setProduct({...product})
-        console.log('product',product)
+        // console.log('product',product)
         
     }
     const handleAddress=(e)=>{
@@ -32,10 +61,10 @@ export default function AddProduct() {
       setAddress({...address})
       product["address"]=address;
       setProduct({...product})
-      console.log('Adress'.address)
+      // console.log('Adress'.address)
   }
 
-  console.log("product is",product)
+  // console.log("product is",product)
 
     const handleSubmit=async()=>{
             const response=await axios.post('http://localhost:9000/product',product)
@@ -114,11 +143,14 @@ export default function AddProduct() {
     </div>
   </div> */}
   <div className="col-12">
-    <button type="submit" className="btn btn-primary" onClick={(e)=>{
+
+    {  isNew===true?<button type="submit" className="btn btn-primary" onClick={(e)=>{
       // e.preventDefault()
       handleSubmit();
     
-    }}>Add product</button>
+    }}>Add</button>:
+
+    <button onClick={handleUpdatedInfo}>Save</button>}
   </div>
 </form>
     </div>

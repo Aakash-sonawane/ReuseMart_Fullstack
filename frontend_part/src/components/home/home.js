@@ -9,10 +9,9 @@ export default function Home({setSearchProductId}) {
     <div className='container'>
       {products && 
       products.map((product)=>{
-        //  
-        return <>
-        <Card data={product} setSearchProductId={setSearchProductId}/>
-     </>   
+        return (
+        <Card  data={product} key={product['_id']} setSearchProductId={setSearchProductId}/>
+       )
       })}
     </div>
   )

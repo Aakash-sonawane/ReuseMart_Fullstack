@@ -12,6 +12,8 @@ import ProductContext from './context/productContext';
 import Register from './components/auth/register/register';
 import Profile from './components/router/profile/profile';
 import MyProduct from './components/router/profile/myProduct/myProduct';
+import About from './components/About';
+import Chat from './components/Chat';
 
 
 function App() {
@@ -38,10 +40,14 @@ function App() {
       children:[
         {
           path:'/addProduct',
-          element:<AddProduct/>
+          element:<AddProduct isNew={true}/>
         },
         {
-          path:'/product',
+          path:'/editProduct/:id',
+          element:<AddProduct isNew={false}/>
+        },
+        {
+          path:'/product/:id',
           element:<Product serchProductid={serchProductid}/>,
         },
         {
@@ -62,7 +68,7 @@ function App() {
             },
             {
               path:'/profile/message',
-              element:<h1>Messages</h1>
+              element:<Chat products={products}/>
             },
             {
               path:'/profile/addProduct',
@@ -72,7 +78,7 @@ function App() {
         },
         {
           path:'/about',
-          element:<h1>about</h1>
+          element:<About/>
         },
       ]
     },

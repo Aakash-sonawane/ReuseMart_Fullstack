@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Card({data,setSearchProductId,isEdit}) {
     const navigate=useNavigate()
-    console.log("isEdit is a",isEdit);
+    // console.log("isEdit is a",isEdit);
     return (
         <div className="box">
             <img src={data.image} className="card-img-top" alt="..." />
@@ -15,14 +15,14 @@ export default function Card({data,setSearchProductId,isEdit}) {
                 {isEdit? 
                 <div className='edit_buttons'>
                     <button onClick={()=>{
-                        navigate('/addProduct')
+                        navigate(`/editProduct/${data['_id']}`)
                     }}>Edit</button>
                     <button>delete</button>
                     </div>
                 :<button id={data._id} className="view_button" onClick={(e)=>{
                     e.preventDefault();
                     setSearchProductId(e.target.id);
-                    navigate('/product')
+                    navigate(`/product/${e.target.id}`)
                     }}>View</button>}
                 
             </div>
