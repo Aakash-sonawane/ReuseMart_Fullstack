@@ -40,11 +40,14 @@ const getUser=async(req,res)=>{
     try {
         const data=await userSchema.findOne({_id:id});
         res.send(data);
-        console.log(data);
+        // console.log(data);
     } catch (error) {
         res.send("not user found")
     }
 }
+
+
+
 exports.register=register;
 exports.login=login;
 exports.getUser=getUser;

@@ -25,7 +25,8 @@ const productSchema=new mongoose.Schema({
     address:{
         type:Object,
         // required:true
-    }
+    },
+    messages:Array
 })
 
 const model=new mongoose.model('product',productSchema);

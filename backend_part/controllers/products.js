@@ -1,7 +1,8 @@
 const productSchema=require('../model/productSchema')
+const userSchema= require('../model/userSchema')
 
  const getProducts= async(req,res)=>{
-    try {
+     try {
         const data=await productSchema.find({});
         res.json(data);
         
@@ -15,7 +16,7 @@ const createProduct=async(req,res)=>{
     try {
         const datatoSave=await product.save();
         res.send({"message":"product Added successfully"})
-        console.log(datatoSave);
+        // console.log(datatoSave);
         
     } catch (error) {
         res.status(404).send("error in saving data")
@@ -23,6 +24,20 @@ const createProduct=async(req,res)=>{
         
     }
 
+}
+
+const updateProduct=async(req,res)=>{
+    
+   try {
+    const {id} =req.query;
+    const data= req.body;
+    const updatedData= await productSchema.findByIdAndUpdate(id,{$set:data})
+    res.send({"message":"Product info save successfully"})
+    // console.log(data)
+   } catch (error) {
+    res.send({"msg":"error"})
+    console.log("error")
+   }
 }
 
 const getProduct=async(req,res)=>{
@@ -38,6 +53,45 @@ const getProduct=async(req,res)=>{
     }
 }
 
+const handleChat=async(req,res)=>{
+    try {
+     const {id} =req.query;
+     console.log(id)
+     const{sender,msgFromSender}=req.body
+     let senderName= sender['name']
+     const chatProduct= await productSchema.findById(id)
+     let pos,newMessage;
+    //  console.log(chatProduct)
+
+     const message=chatProduct.messages && chatProduct.messages.filter((msg,index)=>{
+        if(msg.senderId==sender['_id']){
+            pos=index;
+            return msg;
+        }
+    })
+
+    if(message.length){
+        message[0].chat=[...message[0].chat,{[senderName]:msgFromSender}]
+        chatProduct.messages[pos]=message[0];
+    }
+    else{
+         newMessage={
+                 "senderId":sender['_id'],
+                 "chat":[{[senderName]:msgFromSender}]
+        }
+    }
+    const productData= await productSchema.findByIdAndUpdate(id,{$set:{"messages":newMessage?[...chatProduct.messages,newMessage]:chatProduct.messages}})
+     res.send({"msg":"chat send"})
+    } 
+    
+    catch (error) {
+     res.send({"msg":"error"})
+     console.log(error)
+    }
+ }
+
 exports.getProducts=getProducts
 exports.createProduct=createProduct;
 exports.getProduct=getProduct;
+exports.updateProduct=updateProduct;
+exports.handleChat=handleChat;
