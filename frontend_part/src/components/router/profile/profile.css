@@ -2,11 +2,11 @@
 display: flex;
 padding: 0px 50px;
 gap: 23px;
+height: 550px;
+overflow: hidden;
 }
 .sidebar{
     background-color: rgb(32, 88, 54);
-    height:80vh;
-    width: 20vw;
     display: flex;
     padding: 4px 16px;
     border: 1px solid;

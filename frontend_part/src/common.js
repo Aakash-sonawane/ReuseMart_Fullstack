@@ -1,5 +1,11 @@
 import axios from 'axios'
 
+const fetchdata=async(setData)=>{
+  const response= await axios.get('http://localhost:9000/products')
+  setData(response.data);
+  console.log("run in chat")
+}
+
 const fetchSingleProductData = async (id,setData,navigate) => {
     const response = await axios.get(`http://localhost:9000/product/${id}`);
     setData(response.data)
@@ -12,19 +18,29 @@ const fetchSingleProductData = async (id,setData,navigate) => {
     setData(sellerresponse.data);
   }
 
-//   id=params.id
-  const sendMessage=async(e,chatRef,loginUser,id,)=>{
+
+
+  const sendMessage=async(e,newMsg,setNewMsg,buyer,seller,id,messageListRef,setFlag,msgFrom)=>{
     e.preventDefault()
-        if(!chatRef.current.value){
+    console.log(messageListRef.current)
+        if(!newMsg){
             return;
         }
         const postData={
-          sender:loginUser,
-          msgFromSender:chatRef.current.value
+          buyer:buyer,
+          seller:seller,
+          msgFrom:msgFrom,
+          msgFromSender:newMsg
         }
         const response= await axios.patch(`http://localhost:9000/product/chat?id=${id}`,postData)
-        chatRef.current.value=" ";
+
+        if(messageListRef.current.lastChild){
+          messageListRef.current.lastChild.scrollIntoView({ behavior: 'instant', block: 'end' });
+        }
+
+        setNewMsg("")
+        setFlag(false)
   }
 
 
-export{fetchSingleProductData,fetchUserData,sendMessage}
+export{fetchdata,fetchSingleProductData,fetchUserData,sendMessage}

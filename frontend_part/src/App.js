@@ -14,21 +14,30 @@ import Profile from './components/router/profile/profile';
 import MyProduct from './components/router/profile/myProduct/myProduct';
 import About from './components/About';
 import Chat from './components/Chat';
+import { fetchdata } from './common';
 
 
 function App() {
   const[products,setProducts]=useState([]);
+  console.log("rerun app")
   const[serchProductid,setSearchProductId]=useState('');
   const[loginUser,setloginUser]=useState(JSON.parse(localStorage.getItem('user'))|| []);
-  
 
   
+  let fetchFlag=true;
 
+  
   useEffect(()=>{
     if(loginUser)
     localStorage.setItem('user',JSON.stringify(loginUser));
     // console.log(loginUser)
-    fetchdata();
+    if(!fetchFlag){
+      fetchdata(setProducts);
+    }
+
+    return ()=>{
+      fetchFlag=false;
+    }
     
   },[loginUser]);
 
@@ -48,11 +57,11 @@ function App() {
         },
         {
           path:'/product/:id',
-          element:<Product serchProductid={serchProductid}/>,
+          element:<Product serchProductid={serchProductid} setProductsData={setProducts} productsData={products}/>,
         },
         {
           path:'/profile',
-          element:<Profile/>,
+          element:<Profile setProductsData={setProducts}/>,
           children:[
             {
               path:'/profile/user',
@@ -68,7 +77,7 @@ function App() {
             },
             {
               path:'/profile/message',
-              element:<Chat products={products}/>
+              element:<Chat/>
             },
             {
               path:'/profile/addProduct',
@@ -92,22 +101,18 @@ function App() {
     }
   ])
   // console.log("loginuser",loginUser);
-  const fetchdata=async()=>{
-    const response= await axios.get('http://localhost:9000/products')
-    setProducts(response.data);
-    // console.log(response)
-  }
+ 
   // console.log("products is",products)
 
 
   return (
-    <UserContext.Provider value={[loginUser,setloginUser]}>
       <ProductContext.Provider value={[products,setProducts]}>
+    <UserContext.Provider value={[loginUser,setloginUser]}>
     <RouterProvider router={route}>
 
     </RouterProvider>
-    </ProductContext.Provider>
     </UserContext.Provider>
+    </ProductContext.Provider>
   );
 }
 

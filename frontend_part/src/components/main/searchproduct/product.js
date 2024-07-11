@@ -3,46 +3,67 @@ import React, { useEffect, useRef, useState, useContext} from 'react'
 import userContext from '../../../context/userContext'
 import "./product.css"
 import { useNavigate,useParams} from 'react-router-dom'
+import { fetchdata } from '../../../common'
+import { sendMessage } from '../../../common'
+import productContext from '../../../context/productContext'
 
 
-export default function Product({ serchProductid }) {
-  const [product, setProduct] = useState('')
-  const [seller, setSeller] = useState('')
-  const[loginUser]=useContext(userContext)
-  const [messageArray, setmessageArray] = useState('')
+export default function Product({ serchProductid}) {
+  const [product, setProduct] = useState('');
+  const [seller, setSeller] = useState('');
+  const[loginUser]=useContext(userContext);
+  const [messageArray, setmessageArray] = useState('');
+  const [newMsg,setNewMsg]=useState("")
+  const [flag,setFlag]=useState(false)
 
+  const [products,setProducts]=useContext(productContext)
+
+  let singleProductFlagRef= useRef(null)
+  const messageListRef=useRef()
+
+  
 
   const navigate=useNavigate();
   const params = useParams();
-  const chatRef = useRef(null)
-
-  let flag=false;
+  // const chatRef = useRef(null)
+  singleProductFlagRef.current=false;
   useEffect(() => {
+    
     if(!serchProductid){
       navigate('/')
     }
-    if(flag){
+    if(!singleProductFlagRef.current || !flag){
       fetchSingleProductData()
       // fetchUserData()
     }
+    if(!flag){
+      fetchdata(setProducts)
+    }
 
-    if(product){
+    if(product && product.messages){
       let fiterMessageArray=product.messages.filter(msg=>{
-        return msg.senderId===loginUser['_id']
+        return msg.buyerId===loginUser['_id']
       })
       setmessageArray(fiterMessageArray);
     }
 
-    console.log(seller)
-    return ()=>{
-      flag=true;
+    if(messageListRef.current && messageListRef.current.lastChild){
+      console.log("scroll bottom")
+      messageListRef.current.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
+
+    // console.log("messageListRef",messageListRef.current.lastChild)
+    return ()=>{
+      singleProductFlagRef.current=true;
+      setFlag(true)
+    }
+    
 
     
 
-  },[product])
+  },[product,flag])
 
-  
+
 
 
   const fetchSingleProductData = async () => {
@@ -54,25 +75,33 @@ export default function Product({ serchProductid }) {
     const sellerresponse=await axios.get(`http://localhost:9000/user/${response.data["user_id"]}`);
       setSeller(sellerresponse.data);
   }
-  // const fetchUserData= async ()=>{
-  //   if(product){
-      
-  //   }
+
+
+  // (newMsg,buyer,seller,id,messageListRef,setFlag)
+  // (newMsg,loginUser,seller,params.id,messageListRef,setFlag)
+
+  // const sendMessage=async(e)=>{
+  //   e.preventDefault()
+  //       if(!newMsg){
+  //           return;
+  //       }
+  //       const postData={
+  //         buyer:loginUser,
+  //         seller:seller,
+  //         msgFrom:"buyer",
+  //         msgFromSender:newMsg
+  //       }
+  //       const response= await axios.patch(`http://localhost:9000/product/chat?id=${params.id}`,postData)
+
+  //       if(messageListRef.current.lastChild){
+  //         messageListRef.current.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  //       }
+
+  //       setNewMsg("")
+  //       setFlag(false)
   // }
 
-  const sendMessage=async(e)=>{
-    e.preventDefault()
-        if(!chatRef.current.value){
-            return;
-        }
-        const postData={
-          sender:loginUser,
-          msgFromSender:chatRef.current.value
-        }
-        const response= await axios.patch(`http://localhost:9000/product/chat?id=${params.id}`,postData)
-  }
-
-
+  // messageListRef.current.lastChild).scrollIntoView({ behavior: 'smooth', block: 'end' });
 
   return (
     <div>
@@ -103,22 +132,26 @@ export default function Product({ serchProductid }) {
               <div className='chatroom-wrapper'>
 
                 <div className='chat-app'>
-                  <ul>
+                  <div className='chat-messages'>
+                  <ul className='message-list' ref={messageListRef}>
                   {messageArray.length?messageArray[0].chat.map(msg=>{
                     return <li className={msg[loginUser.name]?'sender':'reciver'}>
-                      <div className='text-msg'>{msg[loginUser.name]}</div>
+                      <div className='text-msg'>{Object.values(msg)[0]}</div>
                     </li>
                   }):null
                 }
                   
                   </ul>
+                  </div>
                 </div>
 
 
                 <div className='chat-form'>
                   <form >
-                  <input type='text' ref={chatRef} className='serachinput'/>
-                  <button type='submit' className='submit-btn' onClick={sendMessage}>send</button>
+                  <input type='text' value={newMsg} onChange={(e)=>{setNewMsg(e.target.value)}} className='serachinput'/>
+                  <button type='submit' className='submit-btn' onClick={(e)=>{
+                    sendMessage(e,newMsg,setNewMsg,loginUser,seller,params.id,messageListRef,setFlag,"buyer")
+                  }}>send</button>
                   </form>
                 </div>
 

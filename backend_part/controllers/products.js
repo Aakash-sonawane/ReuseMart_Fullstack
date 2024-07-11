@@ -4,6 +4,7 @@ const userSchema= require('../model/userSchema')
  const getProducts= async(req,res)=>{
      try {
         const data=await productSchema.find({});
+        // console.log("run all products")
         res.json(data);
         
     } catch (error) {
@@ -14,6 +15,7 @@ const userSchema= require('../model/userSchema')
 const createProduct=async(req,res)=>{
     const product=new productSchema(req.body);
     try {
+        // console.log("run create products")
         const datatoSave=await product.save();
         res.send({"message":"product Added successfully"})
         // console.log(datatoSave);
@@ -29,6 +31,7 @@ const createProduct=async(req,res)=>{
 const updateProduct=async(req,res)=>{
     
    try {
+    // console.log("run update product")
     const {id} =req.query;
     const data= req.body;
     const updatedData= await productSchema.findByIdAndUpdate(id,{$set:data})
@@ -42,6 +45,7 @@ const updateProduct=async(req,res)=>{
 
 const getProduct=async(req,res)=>{
     try {
+        // console.log("run single product")
         const id=req.params.id;
         
         const data=await productSchema.findById(id);
@@ -56,15 +60,26 @@ const getProduct=async(req,res)=>{
 const handleChat=async(req,res)=>{
     try {
      const {id} =req.query;
-     console.log(id)
-     const{sender,msgFromSender}=req.body
-     let senderName= sender['name']
+    //  console.log(id)
+     const{buyer,seller,msgFrom,msgFromSender}=req.body
+     console.log("run chat")
+    //  console.log("buyer",buyer)
+    //  console.log("seller",seller)
+
+     let senderName;
+     if(msgFrom==="buyer"){
+         senderName= buyer['name']
+
+     }else if(msgFrom==="seller"){
+        senderName=seller['name']
+     }
+     console.log(senderName)
      const chatProduct= await productSchema.findById(id)
      let pos,newMessage;
-    //  console.log(chatProduct)
+    //  console.log(seller)
 
      const message=chatProduct.messages && chatProduct.messages.filter((msg,index)=>{
-        if(msg.senderId==sender['_id']){
+        if(msg.buyerId==buyer['_id']){
             pos=index;
             return msg;
         }
@@ -76,7 +91,8 @@ const handleChat=async(req,res)=>{
     }
     else{
          newMessage={
-                 "senderId":sender['_id'],
+                 "buyerId":buyer['_id'],
+                 "sellerId":seller['_id'],
                  "chat":[{[senderName]:msgFromSender}]
         }
     }

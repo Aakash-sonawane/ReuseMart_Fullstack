@@ -16,10 +16,11 @@ flex-direction: column;
 .chatroom-wrapper{
     background: #ebeeeb;
     position: relative;
-    min-height: 200px;
+    min-height: 210px;
     margin: 20px 0 0 0;}
 .chat-form{position: absolute; bottom: 5px; left: 0; width: 100%; padding: 0 15px;}
-.chat-form .serachinput{    width: 70%;
+.chat-form form{display: flex;}
+.chat-form .serachinput{    width: 100%;
      border: 1px solid #2f4b4e;border-right: none;
     border-radius: 12px 0 0 12px;}
 .chat-form .submit-btn{    background: #8db4a4;
@@ -28,8 +29,22 @@ flex-direction: column;
     border-left: none;
 border-radius: 0 12px 12px 0;}
 
-.chat-app{display: flex; flex-direction: column; justify-content: flex-end; min-height: 173px;}
-.chat-app ul{padding: 0 3px;}
-.chat-app li{list-style: none; margin-top: 5px;}
+/* .chat-app{height: 200px;} */
+/* .chat-app ul{padding: 0 3px;} */
+.chat-app li{list-style: none; margin-top: 7px;}
 .chat-app li.sender{text-align: right;}
 .chat-app li .text-msg{display: inline-block; background:#5fb7b4; padding: 2px 14px; border-radius: 10px; font-size: 14px;}
+
+
+/* new chagpt */
+.chat-messages { height: 171px;  overflow-y: scroll;  scroll-behavior: smooth;  position: relative; bottom: 3px;}
+
+.message-list { list-style-type: none;  margin: 0; padding: 0;}
+
+.text-msg { background-color: #f0f0f0;  padding: 8px 12px; border-radius: 10px; max-width: 70%; word-wrap: break-word;}
+
+.chat-form { margin-top: 10px; }
+
+.message-input { width: calc(100% - 70px); padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;}
+
+.send-btn { width: 60px; padding: 8px; background-color: #4CAF50; color: white; border: none;border-radius: 5px; cursor: pointer; font-size: 14px;}

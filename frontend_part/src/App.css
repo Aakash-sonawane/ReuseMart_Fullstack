@@ -8,3 +8,10 @@
 .about-wrapper .cta a:hover {background-color: #0056b3;}
 footer{background: #cdcdcd; margin-top: 20px; padding: 20px;}
 #contact{max-width: 800px; margin: 0 auto; }
+
+/* .profile_view .chatroom-wrapper{height: 100%; background: none;}
+.profile_view .chat-messages{    height: 504px; bottom: 36px;} */
+/* .profile_view .chatroom-wrapper{height: 100%; background: none;}
+.profile_view .chat-form{bottom: 20px;}
+.profile_view .chat-form form{display: flex;}
+.profile_view .chat-form form .serachinput{width: 100%; padding: 4px 20px; font-size: 18px;} */
