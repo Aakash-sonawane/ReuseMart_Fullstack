@@ -62,8 +62,8 @@ const handleChat=async(req,res)=>{
      const {id} =req.query;
     //  console.log(id)
      const{buyer,seller,msgFrom,msgFromSender}=req.body
-     console.log("run chat")
-    //  console.log("buyer",buyer)
+    //  console.log("run chat")
+     console.log("buyer",buyer)
     //  console.log("seller",seller)
 
      let senderName;
@@ -73,7 +73,7 @@ const handleChat=async(req,res)=>{
      }else if(msgFrom==="seller"){
         senderName=seller['name']
      }
-     console.log(senderName)
+    //  console.log(senderName)
      const chatProduct= await productSchema.findById(id)
      let pos,newMessage;
     //  console.log(seller)

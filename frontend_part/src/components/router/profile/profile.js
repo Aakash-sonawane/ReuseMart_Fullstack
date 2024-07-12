@@ -5,9 +5,11 @@ import { Outlet, useNavigate, useOutlet } from 'react-router-dom';
 
 export default function Profile() {
   const[user,setuser]=useContext(userContext);
-  console.log("rerun tt")
+  // console.log("rerun tt")
   const navigate=useNavigate();
   const outlet=useOutlet();
+
+  
   return (
     <div className='container_box'>
         <div className='sidebar'>

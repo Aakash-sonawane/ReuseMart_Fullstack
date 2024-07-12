@@ -4,6 +4,7 @@ import axios from 'axios'
 import { fetchdata, sendMessage } from '../common';
 import productContext from '../context/productContext';
 
+
 export default function Chat() {
 
     const [buyer, setBuyer] = useState('')
@@ -17,24 +18,28 @@ export default function Chat() {
     let [messageArray,setmessageArray]=useState('')
     const messageListRef=useRef()
 
-    useEffect(() => {
-        
-        // console.log("product my", myProducts)
-        if(!flag){
-          // console.log("flag",flag)
-          fetchdata(setProducts)
-        }
 
-        const myProducts=products.filter((product)=>{
-          return product['user_id']===loginUser['_id'];
-      })
+    useEffect(() => {
+
+      const myProducts=products.filter((product)=>{
+        return product['user_id']===loginUser['_id'];
+    })
+
+
+      console.log("myProducts",myProducts)
 
         if(myProducts.length){
             productIdref.current=myProducts[0]['_id']
             
-              setmessageArray(myProducts[0].messages);
+              setmessageArray([...myProducts[0].messages]);
         }
-        if(messageArray.length){
+
+        setTimeout(() => {
+          if (messageListRef.current && messageListRef.current.lastChild) {
+            messageListRef.current.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
+          }
+        }, 0);
+        if(flag){
           // console.log("hello sigle user")
           fetchSingleUser(messageArray[0].buyerId)
         }
@@ -43,12 +48,16 @@ export default function Chat() {
         //   messageListRef.current.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
         // }
 
+        
+
         return ()=>{
           setFlag(true)
         }
     
   
-    },[messageArray,flag])
+    },[products,flag])
+
+    console.log("products in chat",products)
 
 
     const fetchSingleUser = async (id) => {
@@ -99,8 +108,8 @@ export default function Chat() {
                   <form >
                   <input type='text' value={newMsg} onChange={(e)=>{setNewMsg(e.target.value)}} className='serachinput'/>
                   <button type='submit' className='submit-btn' onClick={(e)=>{
-                    sendMessage(e,newMsg,setNewMsg,buyer,loginUser,productIdref.current,messageListRef,setFlag,"seller")
-                    console.log("flag after", flag)
+                    sendMessage(e,newMsg,setNewMsg,buyer,loginUser,productIdref.current,messageListRef,setFlag,"seller",setProducts)
+                    // console.log("flag after", flag)
                   }}>send</button>
                   </form>
                 </div>

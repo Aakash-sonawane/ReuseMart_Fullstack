@@ -20,9 +20,13 @@ const fetchSingleProductData = async (id,setData,navigate) => {
 
 
 
-  const sendMessage=async(e,newMsg,setNewMsg,buyer,seller,id,messageListRef,setFlag,msgFrom)=>{
+  const sendMessage=async(e,newMsg,setNewMsg,buyer,seller,id,messageListRef,setFlag,msgFrom,setProducts)=>{
+
+    
     e.preventDefault()
-    console.log(messageListRef.current)
+    
+    // console.log(messageListRef.current)
+    console.log("buyer",buyer)
         if(!newMsg){
             return;
         }
@@ -39,7 +43,15 @@ const fetchSingleProductData = async (id,setData,navigate) => {
         }
 
         setNewMsg("")
+        
+
+        if(setProducts){
+          fetchdata(setProducts);
+        }
         setFlag(false)
+        // if(messageListRef.current.lastChild){
+        //   messageListRef.current.lastChild.scrollIntoView({ behavior: 'instant', block: 'end' });
+        // }
   }
 
 

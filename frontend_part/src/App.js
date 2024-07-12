@@ -23,24 +23,21 @@ function App() {
   const[serchProductid,setSearchProductId]=useState('');
   const[loginUser,setloginUser]=useState(JSON.parse(localStorage.getItem('user'))|| []);
 
-  
   let fetchFlag=true;
 
-  
   useEffect(()=>{
-    if(loginUser)
-    localStorage.setItem('user',JSON.stringify(loginUser));
-    // console.log(loginUser)
-    if(!fetchFlag){
+    if(loginUser){
+      localStorage.setItem('user',JSON.stringify(loginUser));
+    }
+    if(fetchFlag){
       fetchdata(setProducts);
     }
-
+    
     return ()=>{
       fetchFlag=false;
     }
     
   },[loginUser]);
-
 
   const route=createBrowserRouter([
     {
@@ -57,7 +54,7 @@ function App() {
         },
         {
           path:'/product/:id',
-          element:<Product serchProductid={serchProductid} setProductsData={setProducts} productsData={products}/>,
+          element:<Product serchProductid={serchProductid}/>,
         },
         {
           path:'/profile',
@@ -100,16 +97,11 @@ function App() {
       element:<Register/>
     }
   ])
-  // console.log("loginuser",loginUser);
- 
-  // console.log("products is",products)
-
 
   return (
       <ProductContext.Provider value={[products,setProducts]}>
     <UserContext.Provider value={[loginUser,setloginUser]}>
     <RouterProvider router={route}>
-
     </RouterProvider>
     </UserContext.Provider>
     </ProductContext.Provider>

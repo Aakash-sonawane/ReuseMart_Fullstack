@@ -34,7 +34,6 @@ export default function Product({ serchProductid}) {
     }
     if(!singleProductFlagRef.current || !flag){
       fetchSingleProductData()
-      // fetchUserData()
     }
     if(!flag){
       fetchdata(setProducts)
@@ -47,20 +46,16 @@ export default function Product({ serchProductid}) {
       setmessageArray(fiterMessageArray);
     }
 
-    if(messageListRef.current && messageListRef.current.lastChild){
-      console.log("scroll bottom")
-      messageListRef.current.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }
-
+    setTimeout(() => {
+      if (messageListRef.current && messageListRef.current.lastChild) {
+        messageListRef.current.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }
+    }, 0);
     // console.log("messageListRef",messageListRef.current.lastChild)
     return ()=>{
       singleProductFlagRef.current=true;
       setFlag(true)
     }
-    
-
-    
-
   },[product,flag])
 
 
@@ -105,9 +100,7 @@ export default function Product({ serchProductid}) {
 
   return (
     <div>
-      
       {(product && seller) &&
-
         <div className="container">
           <div className='product'>
             <div className='product_container'>
