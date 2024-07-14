@@ -6,13 +6,18 @@ export default function Home({setSearchProductId}) {
   const [products]=useContext(productContext);
     // console.log("home product is",products)
   return (
-    <div className='container'>
-      {products && 
-      products.map((product)=>{
-        return (
-        <Card  data={product} key={product['_id']} setSearchProductId={setSearchProductId}/>
-       )
-      })}
+    <div className='wrapper'>
+    <div className='container-wrap'>
+      <div className='inner-wrapper'>
+          {products && 
+          products.map((product)=>{
+            return (
+            <Card  data={product} key={product['_id']} setSearchProductId={setSearchProductId}/>
+          )
+          })}
+      </div>
+    </div>
+
     </div>
   )
 }

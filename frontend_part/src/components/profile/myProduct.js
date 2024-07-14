@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import productContext from '../../../../context/productContext'
-import userContext from '../../../../context/userContext';
-import Card from '../../../home/card';
-import "../../../home/home.css"
-import "./myProduct.css"
+import productContext from '../../context/productContext';
+import userContext from '../../context/userContext';
+import Card from '../home/card';
+import "../home/home.css"
+// import "./myProduct.css"
 
 export default function MyProduct() {
     const [product, setProduct] = useContext(productContext)
@@ -20,14 +20,16 @@ export default function MyProduct() {
 
     // { myProducts && console.log("product in myproduct component is", myProducts) }
     return (
-        <div className='myProduct'>
-            <div className='container'>
+        <div className='self-products'>
+            <div className='container1'>
+            <div className='inner-wrapper'>
                 {myProducts &&
                     myProducts.map((item) => {
                         console.log("item",item['_id'])
                         return <Card key={item['_id']} data={item} isEdit={true} />
                     })
                 }
+            </div>
 
 
             </div>

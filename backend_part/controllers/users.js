@@ -39,7 +39,9 @@ const getUser=async(req,res)=>{
     const {id}=req.params;
     try {
         const data=await userSchema.findOne({_id:id});
-        res.send(data);
+        // const needdat={"_id":data['_id'],"name":data['name']}
+        // console.log("needdat",needdat)
+        res.send({"_id":data['id'],"name":data['name']});
         console.log("run get user");
     } catch (error) {
         res.send("not user found")

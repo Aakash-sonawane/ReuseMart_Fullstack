@@ -3,44 +3,50 @@ import React from 'react'
 export default function About() {
   return (
     <div className='about-wrapper'>
-    <div class="about-container">
+    <div className="about-container">
         <header>
             <h1>Welcome to Reusemart!</h1>
+            <p>Your Marketplace for Second-Hand Treasures</p>
         </header>
-        <main>
-            <section>
-                <h2>Our Story</h2>
-                <p>At Reusemart, we believe in the power of reuse to create a sustainable future. Our journey began with a simple yet profound idea: to make reusing everyday items accessible and effortless for everyone. Founded [insert year], we have since grown into a passionate team dedicated to reducing waste and promoting conscious consumerism.</p>
-            </section>
-            
-            <section>
-                <h2>Our Mission</h2>
-                <p>Our mission is clear: to foster a culture of reuse by providing high-quality, affordable products that are kind to both people and the planet. We aim to inspire individuals and businesses alike to embrace sustainable alternatives and reduce their environmental footprint.</p>
-            </section>
-            
-            <section>
-                <h2>What Sets Us Apart</h2>
-                <p>What makes Reusemart unique is our commitment to quality and sustainability. We carefully curate our product offerings, ensuring each item meets our stringent standards for durability, functionality, and eco-friendliness. By choosing Reusemart, you're not just making a purchase—you're making a positive impact on the environment.</p>
-            </section>
-            
-            <section class="team">
-                <h2>Meet Our Team</h2>
-                <p>Behind Reusemart is a dedicated team of [number] individuals who are passionate about sustainability and making a difference. From our founders to our customer support team, each member brings a unique perspective and expertise to our mission.</p>
-            </section>
-            
-            <section>
-                <h2>Customer Commitment</h2>
-                <p>At Reusemart, our customers are at the heart of everything we do. We strive to provide exceptional service and a seamless shopping experience. Your satisfaction is our top priority, and we are always here to assist you on your journey towards a more sustainable lifestyle.</p>
-            </section>
-            
-            <section>
-                <h2>Join Us in Making a Difference</h2>
-                <p>Together, we can create a world where reuse is the norm rather than the exception. Whether you're shopping for everyday essentials or searching for innovative reuse solutions, we invite you to explore our offerings and join us in making a positive impact.</p>
-                <div class="cta">
-                    <a href="#contact">Contact Us</a>
-                </div>
-            </section>
-        </main>
+    
+        <section>
+            <h2>Our Mission</h2>
+            <p>
+                At Reusemart, we believe in the beauty of second-hand items finding new homes and stories. Our platform is designed to facilitate connections between buyers and sellers, making it easy to chat and negotiate directly.
+            </p>
+            <ul>
+                <li><strong>Buyers:</strong> Discover unique and affordable items that are gently used and full of character.</li>
+                <li><strong>Sellers:</strong> Easily list items and communicate directly with potential buyers to arrange transactions.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Why Choose Us?</h2>
+            <ul>
+                <li><strong>Ease of Use:</strong> Our user-friendly interface makes it simple to browse, connect, and negotiate.</li>
+                <li><strong>Community Focused:</strong> We foster a supportive environment where trust and respect are paramount.</li>
+                <li><strong>Simplicity:</strong> By facilitating direct communication, we simplify the buying and selling process.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>How It Works</h2>
+            <ol>
+                <li><strong>List Your Item:</strong> Create a listing with photos and details.</li>
+                <li><strong>Connect and Negotiate:</strong> Chat directly with potential buyers or sellers to discuss details and arrange transactions.</li>
+                <li><strong>Finalize Your Transaction:</strong> Agree on terms, meet up (if applicable), and complete your transaction offline.</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Join Us!</h2>
+            <p>
+                Whether you're looking to declutter your space or find a unique treasure, Reusemart connects you with like-minded individuals passionate about sustainable living and quality finds.
+            </p>
+            <p>
+                Ready to explore? <a href="#">Start browsing</a> or <a href="#">selling today</a> and join our community!
+            </p>
+        </section>
         
     </div>
     

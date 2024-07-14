@@ -57,57 +57,108 @@ const getProduct=async(req,res)=>{
     }
 }
 
-const handleChat=async(req,res)=>{
-    try {
-     const {id} =req.query;
-    //  console.log(id)
-     const{buyer,seller,msgFrom,msgFromSender}=req.body
-    //  console.log("run chat")
-     console.log("buyer",buyer)
-    //  console.log("seller",seller)
+// const handleChat=async(req,res)=>{
+//     try {
+//      const {id} =req.query;
+//     //  console.log(id)
+//      const{buyer,seller,msgFrom,msgFromSender}=req.body
+//     //  console.log("run chat")
+//      console.log("buyer",buyer)
+//     //  console.log("seller",seller)
 
-     let senderName;
-     if(msgFrom==="buyer"){
-         senderName= buyer['name']
+//      let senderName;
+//      if(msgFrom==="buyer"){
+//          senderName= buyer['name']
 
-     }else if(msgFrom==="seller"){
-        senderName=seller['name']
-     }
-    //  console.log(senderName)
-     const chatProduct= await productSchema.findById(id)
-     let pos,newMessage;
-    //  console.log(seller)
+//      }else if(msgFrom==="seller"){
+//         senderName=seller['name']
+//      }
+//     //  console.log(senderName)
+//      const chatProduct= await productSchema.findById(id)
+//      let pos,newMessage;
+//     //  console.log(seller)
 
-     const message=chatProduct.messages && chatProduct.messages.filter((msg,index)=>{
-        if(msg.buyerId==buyer['_id']){
-            pos=index;
-            return msg;
-        }
-    })
+//      const message=chatProduct.messages && chatProduct.messages.filter((msg,index)=>{
+//         if(msg.buyerId==buyer['_id']){
+//             pos=index;
+//             return msg;
+//         }
+//     })
 
-    if(message.length){
-        message[0].chat=[...message[0].chat,{[senderName]:msgFromSender}]
-        chatProduct.messages[pos]=message[0];
-    }
-    else{
-         newMessage={
-                 "buyerId":buyer['_id'],
-                 "sellerId":seller['_id'],
-                 "chat":[{[senderName]:msgFromSender}]
-        }
-    }
-    const productData= await productSchema.findByIdAndUpdate(id,{$set:{"messages":newMessage?[...chatProduct.messages,newMessage]:chatProduct.messages}})
-     res.send({"msg":"chat send"})
-    } 
+//     if(message.length){
+//         message[0].chat=[...message[0].chat,{[senderName]:msgFromSender}]
+//         chatProduct.messages[pos]=message[0];
+//     }
+//     else{
+//          newMessage={
+//                  "buyerId":buyer['_id'],
+//                  "sellerId":seller['_id'],
+//                  "chat":[{[senderName]:msgFromSender}]
+//         }
+//     }
+//     const productData= await productSchema.findByIdAndUpdate(id,{$set:{"messages":newMessage?[...chatProduct.messages,newMessage]:chatProduct.messages}})
+//      res.send({"msg":"chat send"})
+//     } 
     
-    catch (error) {
-     res.send({"msg":"error"})
-     console.log(error)
-    }
- }
+//     catch (error) {
+//      res.send({"msg":"error"})
+//      console.log(error)
+//     }
+//  }
+
+
+ const handleChat=async(req,res)=>{
+     try {
+      const {id} =req.query;
+      console.log(id)
+      const{buyer,seller,msgFrom,msgFromSender}=req.body
+    //   console.log("run chat")
+      console.log("buyer",buyer)
+    //   console.log("seller",seller)
+ 
+      let senderName;
+      if(msgFrom==="buyer"){
+          senderName= buyer['name']
+ 
+      }else if(msgFrom==="seller"){
+         senderName=seller['name']
+      }
+     //  console.log(senderName)
+      const chatProduct= await productSchema.findById(id)
+      let pos,newMessage;
+     //  console.log(seller)
+ 
+      const message=chatProduct.messages && chatProduct.messages.filter((msg,index)=>{
+         if(msg.buyer['_id']==buyer['_id']){
+             pos=index;
+             return msg;
+         }
+     })
+ 
+     if(message.length){
+         message[0].chat=[...message[0].chat,{[senderName]:msgFromSender}]
+         chatProduct.messages[pos]=message[0];
+     }
+     else{
+          newMessage={
+                  "buyer":buyer,
+                  "seller":seller,
+                  "chat":[{[senderName]:msgFromSender}]
+         }
+     }
+     const productData= await productSchema.findByIdAndUpdate(id,{$set:{"messages":newMessage?[...chatProduct.messages,newMessage]:chatProduct.messages}})
+      res.send({"msg":"chat send"})
+     } 
+     
+     catch (error) {
+      res.send({"msg":"error"})
+      console.log(error)
+     }
+  }
 
 exports.getProducts=getProducts
 exports.createProduct=createProduct;
 exports.getProduct=getProduct;
 exports.updateProduct=updateProduct;
 exports.handleChat=handleChat;
+

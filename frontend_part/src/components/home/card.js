@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 export default function Card({data,setSearchProductId,isEdit}) {
     const navigate=useNavigate()
     return (
-        <div className="box">
+        <div className="card-wrapper">
             <div className='img-wrap'>
                 <img src={data.image} className="card-img-top" alt="..." />
             </div>
             <div className="card-body">
-                <h5 className="card-title">{data.productName}</h5>
-                <p className="card-text">Price:-{data.price}</p>
+                <div className="price">₹ {data.price}</div>
+                <div className="title">{data.productName}</div>
                 {isEdit? 
                 <div className='edit_buttons'>
                     <button onClick={()=>{
@@ -20,11 +20,11 @@ export default function Card({data,setSearchProductId,isEdit}) {
                     
                     <button>delete</button>
                 </div>
-                :<button id={data._id} className="view_button" onClick={(e)=>{
+                :<div id={data._id} className="view_button" onClick={(e)=>{
                     e.preventDefault();
                     setSearchProductId(e.target.id);
                     navigate(`/product/${e.target.id}`)
-                    }}>View</button>}
+                    }}>View</div>}
                 
             </div>
         </div>

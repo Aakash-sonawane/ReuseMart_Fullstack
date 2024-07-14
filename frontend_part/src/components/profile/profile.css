@@ -1,0 +1,40 @@
+
+.profile-wrapper .inner-wrap{display: flex; justify-content: space-between; grid-template-columns: 1fr 1fr 1fr;}
+
+.profile-wrapper .sidebar{display: flex; flex: 0 0 20%; max-width: 20%; border-right: 5px solid #bebdbd; }
+.profile-wrapper .profile_view{flex: 0 0 75%; max-width: 75%; margin-top: 10px; border-radius: 9px; }
+
+.profile-wrapper .sidebar_container{ width: 100%;}
+.profile-wrapper .sidebar ul{ display: flex; width: 100%; padding: 0 15px 0 0; justify-content: flex-start; flex-direction: column; }
+.profile-wrapper .sidebar ul li{font-size: 18px; margin-top: 10px; padding: 12px; border-radius: 6px; border: 1px solid black; cursor: pointer; text-align: center; background-color: rgb(240, 240, 240); color: #333; list-style: none;}
+
+.profile-wrapper .user_profile{ display: flex; justify-content: center; flex-direction: column; align-items: center;}
+.profile-wrapper .user_profile .img-wrap{ max-width: 200px; border-radius: 50%; margin-bottom: 20px; overflow: hidden;}
+.profile-wrapper .user_profile .img-wrap img{width: 100%; height: auto;}
+.profile-wrapper .user_profile{font-size: 22px;}
+
+.profile-wrapper .profile_view .self-products .inner-wrapper{grid-template-columns: 1fr 1fr 1fr;}
+
+.profile_view .chatroom-wrapper{min-height: 495px;}
+.profile_view .chat-messages { height: 417px; }
+.profile_view .chatroom-wrapper .heading{font-size: 20px; margin: 0; letter-spacing: 1.3px; background: #333; color: #fff; margin-bottom: 3px; padding: 7px 16px;}
+
+
+@media only screen and (max-width:999px){
+    .profile-wrapper .sidebar{ flex: 0 0 30%; max-width: 30%;}
+    .profile-wrapper .profile_view{ flex: 0 0 65%; max-width: 65%;}
+    
+}
+
+@media only screen and (max-width:1019px) {
+    .profile-wrapper .profile_view .self-products .inner-wrapper{grid-template-columns: 1fr 1fr;}
+    
+}
+@media only screen and (max-width:739px) {
+    .profile-wrapper .profile_view .self-products .inner-wrapper{grid-template-columns: 1fr;}
+    
+}
+/* @media only screen and (max-width:469px) {
+    .profile-wrapper .inner-wrapper{grid-template-columns: 1fr;}
+    
+} */

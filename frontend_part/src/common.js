@@ -22,14 +22,17 @@ const fetchSingleProductData = async (id,setData,navigate) => {
 
   const sendMessage=async(e,newMsg,setNewMsg,buyer,seller,id,messageListRef,setFlag,msgFrom,setProducts)=>{
 
+    console.log("id is here",id)
+
     
     e.preventDefault()
     
     // console.log(messageListRef.current)
-    console.log("buyer",buyer)
+    console.log("buyer on submit",buyer)
         if(!newMsg){
             return;
         }
+        console.log(buyer)
         const postData={
           buyer:buyer,
           seller:seller,
