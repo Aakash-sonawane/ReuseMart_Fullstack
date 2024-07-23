@@ -40,16 +40,21 @@
                 npm install
             </code></pre>
         </li>
+        
         <li><strong>Configure environment variables:</strong>
             <p>Create a <code>.env</code> file in the <code>backend</code> directory and add the necessary environment variables (e.g., database connection string, port number, etc.).</p>
         </li>
         <li><strong>Run the application:</strong>
             <p>Start the backend server:</p>
-            <pre><code>cd backend
-npm start</code></pre>
+            <pre><code>
+                cd backend
+                npm start
+            </code></pre>
             <p>Start the frontend server:</p>
-            <pre><code>cd ../frontend
-npm start</code></pre>
+            <pre><code>
+                cd ../frontend
+                npm start
+            </code></pre>
         </li>
         <li><strong>Access the application:</strong>
             <p>Open your browser and go to <a href="http://localhost:5000">http://localhost:5000</a></p>
