@@ -15,7 +15,7 @@ ReuseMart is a marketplace application for buying and selling second-hand items.
 
 - **Frontend:** React.js
 - **Backend:** Node.js, Express.js
-- **Database:** MongoDB, MySQL
+- **Database:** MongoDB
 
 ## Installation
 
