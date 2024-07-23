@@ -8,7 +8,6 @@
 <body>
     <h1>ReuseMart</h1>
     <p>ReuseMart is a marketplace application for buying and selling second-hand items. This project is built with React.js for the frontend and Node.js with Express.js for the backend.</p>
-
     <h2>Features</h2>
     <ul>
         <li><strong>Buy and Sell Second-Hand Items:</strong> Users can list items for sale and browse items to buy.</li>
@@ -18,14 +17,12 @@
         <li><strong>Responsive Design:</strong> Ensures usability across various devices and screen sizes.</li>
         <li><strong>Profile Management:</strong> Users can view and manage their listed products in their profile.</li>
     </ul>
-
     <h2>Technologies Used</h2>
     <ul>
         <li><strong>Frontend:</strong> React.js</li>
         <li><strong>Backend:</strong> Node.js, Express.js</li>
         <li><strong>Database:</strong> MongoDB</li>
     </ul>
-
     <h2>Installation</h2>
     <h3>Prerequisites</h3>
     <p>Node.js and npm installed on your machine</p>
@@ -36,10 +33,12 @@
             <pre><code>git clone git@github.com:Aakash-sonawane/ReuseMart_Fullstack.git</code></pre>
         </li>
         <li><strong>Install dependencies for both frontend and backend:</strong>
-            <pre><code>cd frontend
-npm install
-cd backend
-npm install</code></pre>
+            <pre><code>
+                cd frontend
+                npm install
+                cd backend
+                npm install
+            </code></pre>
         </li>
         <li><strong>Configure environment variables:</strong>
             <p>Create a <code>.env</code> file in the <code>backend</code> directory and add the necessary environment variables (e.g., database connection string, port number, etc.).</p>
