@@ -15,8 +15,7 @@ ReuseMart is a marketplace application for buying and selling second-hand items.
 
 - **Frontend:** React.js
 - **Backend:** Node.js, Express.js
-- **Database:** (Specify the database you used, e.g., MongoDB, MySQL)
-- **Real-Time Communication:** (Specify the technology used for chat functionality, e.g., Socket.io)
+- **Database:** MongoDB, MySQL
 
 ## Installation
 
@@ -29,5 +28,5 @@ ReuseMart is a marketplace application for buying and selling second-hand items.
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/reuseMart.git
-   cd reuseMart
+   git clone git@github.com:Aakash-sonawane/ReuseMart_Fullstack.git
+
